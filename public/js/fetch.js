@@ -5,6 +5,7 @@ const r = new snoowrap({
   refreshToken: 'put your refresh token here'
 });
 
+r.getNew().then(console.log);
 
 // var snoowrap = require('snoowrap/src/snoowrap.js');
 /*require(['snoowrap/src/snoowrap.js'], function (snoowrap) {
