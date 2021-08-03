@@ -15,9 +15,14 @@ const fetch = (word, sub) => {
       }
     });
   }).then(() => {
-    console.log("Final Ratio: ")
-    console.log(count / total);
+    let ratio = (count / total) * 100;
+    document.querySelector("#result").innerHTML = `${ratio}%`;
   })
 }
 
-fetch("How", "redditdev");
+document.querySelector("#searchButton").addEventListener("click", function() {
+  fetch(document.querySelector("#wordInput").value, document.querySelector("#subInput").value)
+});
+
+
+//fetch("How", "redditdev");
