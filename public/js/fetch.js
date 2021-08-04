@@ -7,12 +7,32 @@ const fetch = (word, sub) => {
   let count = 0;
   newPosts = r.getNew(sub);
   newPosts.forEach(post => {
+    console.log(post);
     postTitle = post.title.split(" ");
     postTitle.forEach(currWord => {
       total += 1;
       if (currWord.toLowerCase() == word.toLowerCase()) {
         count += 1;
       }
+    });
+    try {
+    postContent = post.selftext.split(" ");
+    postContent.forEach(currWord => {
+      total += 1;
+      if (currWord.toLowerCase() == word.toLowerCase()) {
+        count += 1;
+      }
+    });
+    } catch {
+    }
+    post.comments.fetchAll().forEach(comment => {
+        commentText = comment.body.split(" ")
+        commentText.forEach(currWord => {
+      total += 1;
+      if (currWord.toLowerCase() == word.toLowerCase()) {
+        count += 1;
+      }
+    });
     });
   }).then(() => {
     let ratio = (count / total) * 100;
