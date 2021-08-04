@@ -25,6 +25,15 @@ const fetch = (word, sub) => {
     });
     } catch {
     }
+    post.comments.fetchAll().forEach(comment => {
+        commentText = comment.body.split(" ")
+        commentText.forEach(currWord => {
+      total += 1;
+      if (currWord.toLowerCase() == word.toLowerCase()) {
+        count += 1;
+      }
+    });
+    });
   }).then(() => {
     let ratio = (count / total) * 100;
     document.querySelector("#result").innerHTML = `${ratio}%`;
