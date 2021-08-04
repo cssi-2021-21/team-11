@@ -26,6 +26,9 @@
     <script src ="js/signIn.js"></script>
     <style media="screen">
         @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+        body {
+            background-image: url('img_girl.jpg');
+        }
     </style>
   </head>
   <body>
@@ -42,7 +45,7 @@
             <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                <a class="button is-primary">
+                <a class="button is-primary" onclick="signIn()">
                     <strong>Log in with Google</strong>
                 </a>
                 </div>
@@ -50,10 +53,12 @@
             </div>
         </div>
         </nav>
-    <section class="hero is-fullheight is-default is-bold">
+
+
+    <section class="hero is-default is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <div class="columns is-vcentered">
+                <div class="columns">
                     <div class="column is-6 is-offset-3">
                         <h1 class="title is-2">
                             Welcome to Subreddit Word Frequency Counter 
@@ -62,19 +67,16 @@
                             Log in to request subreddits to track. 
                         </h2>
                         <br>
-                        <p class="has-text-centered">
-                            <a class="button is-medium is-info is-outlined" onclick="signIn()">
-                                Sign In
-                            </a>
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
+         <!--CANVAS-->
+        <canvas id="myCanvas" width="1000" height="300"></canvas>
     </section>
+     
   
-    <script>
-
-    </script>
+    <script src="js/node_modules/wordcloud/src/wordcloud2.js"></script>
+    <script defer src="js/wordcloud.js"></script>
   </body>
 </html>
