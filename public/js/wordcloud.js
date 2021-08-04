@@ -5,6 +5,6 @@ list2 = [['canvas2',90],['foo', 30], ['bar', 60]]
 
 createWordCloud = (list) => {
     console.log("Running create word cloud")
-    WordCloud(document.getElementById('my_canvas'), { list: list } );
+    WordCloud(document.getElementById('myCanvas'), { list: list } );
 }
 createWordCloud(list1)
