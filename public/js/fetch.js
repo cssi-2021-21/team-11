@@ -7,6 +7,7 @@ const fetch = (word, sub) => {
   let count = 0;
   newPosts = r.getNew(sub);
   newPosts.forEach(post => {
+    console.log(post);
     postTitle = post.title.split(" ");
     postTitle.forEach(currWord => {
       total += 1;
@@ -14,6 +15,16 @@ const fetch = (word, sub) => {
         count += 1;
       }
     });
+    try {
+    postContent = post.selftext.split(" ");
+    postContent.forEach(currWord => {
+      total += 1;
+      if (currWord.toLowerCase() == word.toLowerCase()) {
+        count += 1;
+      }
+    });
+    } catch {
+    }
   }).then(() => {
     let ratio = (count / total) * 100;
     document.querySelector("#result").innerHTML = `${ratio}%`;
