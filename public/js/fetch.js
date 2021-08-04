@@ -5,7 +5,7 @@ const r = new snoowrap(snoo);
 const fetch = (sub) => {
   newPosts = r.getNew(sub);
   let words = [];
-  newPosts.forEach(post => {
+  return newPosts.forEach(post => {
     words.push(post.title.split(" "));
    try {
      words.push(post.selftext.split(" "))
@@ -19,13 +19,31 @@ const fetch = (sub) => {
     } catch (error) {
         console.log(error);
     }
+  }).then(() => {
+      return words.flat();
   })
-  return words;
 }
 
+
+count = (list) => {
+    words = {}
+    list.forEach(word => {
+        if (word in words) {
+            words[word] += 1
+        }else {
+            words[word] = 1
+        }
+    })
+    return words
+}
+
+search = (sub) => {
+    console.log(count(fetch(sub)))
+}
+
+
 document.querySelector("#searchButton").addEventListener("click", function() {
-  fetch(document.querySelector("#wordInput").value, document.querySelector("#subInput").value)
+  search(document.querySelector("#subInput").value)
 });
 
 
-//fetch("How", "redditdev");
