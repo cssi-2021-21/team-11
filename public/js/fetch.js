@@ -2,42 +2,25 @@ const r = new snoowrap(snoo);
 
 
 
-const fetch = (word, sub) => {
-  let total = 0;
-  let count = 0;
+const fetch = (sub) => {
   newPosts = r.getNew(sub);
+  let words = [];
   newPosts.forEach(post => {
-    console.log(post);
-    postTitle = post.title.split(" ");
-    postTitle.forEach(currWord => {
-      total += 1;
-      if (currWord.toLowerCase() == word.toLowerCase()) {
-        count += 1;
-      }
-    });
-    try {
-    postContent = post.selftext.split(" ");
-    postContent.forEach(currWord => {
-      total += 1;
-      if (currWord.toLowerCase() == word.toLowerCase()) {
-        count += 1;
-      }
-    });
-    } catch {
+    words.push(post.title.split(" "));
+   try {
+     words.push(post.selftext.split(" "))
+   } catch (error) {
+        console.log(error);
     }
+    try {
     post.comments.fetchAll().forEach(comment => {
-        commentText = comment.body.split(" ")
-        commentText.forEach(currWord => {
-      total += 1;
-      if (currWord.toLowerCase() == word.toLowerCase()) {
-        count += 1;
-      }
+        words.push(comment.body.split(" "))
     });
-    });
-  }).then(() => {
-    let ratio = (count / total) * 100;
-    document.querySelector("#result").innerHTML = `${ratio}%`;
+    } catch (error) {
+        console.log(error);
+    }
   })
+  return words;
 }
 
 document.querySelector("#searchButton").addEventListener("click", function() {
