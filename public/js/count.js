@@ -39,15 +39,15 @@ for (let i in wordCounts) {
     results.appendChild(node);
 }
 
-const createChart = (canvas, words, counts ) => {
+const createChart = (canvas, sorted_words, wordsTotal) => {
     const ctx = canvas.getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: words,
+            labels: sorted_words.map(ar => ar[0]),
             datasets: [{
                 label: 'frequency',
-                data: counts,
+                data: sorted_words.map(ar => 100*ar[1]/wordsTotal),
                 borderWidth: 1
             }]
         },
@@ -67,9 +67,6 @@ const createChart = (canvas, words, counts ) => {
     });
 }
 
-sortWordsByFrequency(count(testList))
+sorted_words = sortWordsByFrequency(count(testList))
 const chart = document.querySelector("#myChart2")
-const test_words = sortWordsByFrequency(count(testList)).map(ar => ar[0])
-const test_data = sortWordsByFrequency(count(testList)).map(ar => 100*ar[1]/testList.length)
-
-createChart(chart,test_words,test_data)
+createChart(chart,sorted_words,testList.length)
