@@ -90,6 +90,16 @@ const createChart = (canvas, sorted_words, wordsTotal, sub) => {
     });
 }
 
+createWordCloud = (list, wordsTotal) => {
+    console.log("Running create word cloud")
+    // console.log(list)
+    percent_list = list.map(ar => [ar[0],ar[1]/wordsTotal])
+    // console.log("percent list: ", percent_list)
+    scaled_percent_list = percent_list.map(ar => [ar[0],Math.round(10*ar[1])])
+    // console.log("scaled percent list: ", scaled_percent_list)
+    WordCloud(document.getElementById('myWordCloud'), { list: list} );
+}
+
 const search = async (sub) => {
     all_words = (await fetch(sub))
     console.log(all_words.length)
@@ -102,8 +112,12 @@ const search = async (sub) => {
     const sorted_words = sortWordsByFrequency(counted_words)
     console.log("sorted_words: ", sorted_words)
 
+    // Makes bar chart
     const chart = document.querySelector("#myBarChart")
     createChart(chart, sorted_words,wordsArray.length,sub)
+
+    // Makes word cloud
+    createWordCloud(sorted_words,all_words.length )
     
 }
 
