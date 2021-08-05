@@ -1,7 +1,6 @@
 const r = new snoowrap(snoo);
 
 const getReplies = async (comment) => {
-  console.log("start getReplies")
   let result = [];
   const replies = await comment.replies.fetchAll()
     for (const reply of replies) {
@@ -9,8 +8,6 @@ const getReplies = async (comment) => {
     const subReplies = await getReplies(reply);
     result.push(subReplies);
   }
-  console.log("getReplies run")
-  console.log(result.flat())
   return result.flat()
 }
 
@@ -28,9 +25,7 @@ const fetch = async (sub) => {
     const comments = await post.comments.fetchAll()
       for(const comment of comments) {
         words.push(comment.body.split(" "))
-        console.log(comment.body.split(" "))
         words.push(await getReplies(comment))
-        console.log(await getReplies(comment))
     }
     } catch (error) {
         console.log(error);
@@ -54,7 +49,6 @@ const count = (list) => {
 
 const search = async (sub) => {
     let wordsArray = (await fetch(sub))
-    console.log(wordsArray)
     console.log(count(wordsArray))
 }
 
