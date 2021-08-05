@@ -1,17 +1,5 @@
 testList = ["word1","word2","word3","word4","word1","word1","word4" ]
 
-count = (list) => {
-    words = {}
-    list.forEach(word => {
-        if (word in words) {
-            words[word] += 1
-        }else {
-            words[word] = 1
-        }
-    })
-    return words
-}
-
 // Takes dictionary of words where the values represent the number of words and outputs sorted 2d array
 const sortWordsByFrequency = (words) => {
     // items is words in 2d array form
