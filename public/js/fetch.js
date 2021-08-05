@@ -47,6 +47,49 @@ const count = (list) => {
     return words
 }
 
+// Takes dictionary of words where the values represent the number of words and outputs sorted 2d array
+const sortWordsByFrequency = (words) => {
+    console.log("sorting")
+    // items is words in 2d array form
+    let items = Object.keys(words).map(function(key) {
+        return [key, words[key]];
+    });
+    // Sort the array based on the second element - count
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    return items
+}
+
+
+const createChart = (canvas, sorted_words, wordsTotal, sub) => {
+    const ctx = canvas.getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sorted_words.map(ar => ar[0]).slice(0,10),
+            datasets: [{
+                label: '% frequency of words in r/' + sub,
+                data: sorted_words.map(ar => 100*ar[1]/wordsTotal).slice(0,10),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        // Include a percent sign in the ticks
+                        callback: function(value, index, values) {
+                            return  value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 const search = async (sub) => {
     all_words = (await fetch(sub))
     console.log(all_words.length)
