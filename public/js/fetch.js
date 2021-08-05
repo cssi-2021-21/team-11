@@ -1,19 +1,23 @@
 const r = new snoowrap(snoo);
 
-const getReplies = (comment) => {
-  result = [];
-  return comment.replies.fetchAll().forEach(reply => {
+const getReplies = async (comment) => {
+  console.log("start getReplies")
+  let result = [];
+  const replies = await comment.replies.fetchAll()
+    for (const reply of replies) {
     result.push(reply.body.split(" "));
-    result.push(getReplies(reply));
-  }).then(() => {
-    return result.flat();
-  });
+    const subReplies = await getReplies(reply);
+    result.push(subReplies);
+  }
+  console.log("getReplies run")
+  console.log(result.flat())
+  return result.flat()
 }
 
-const fetch = (sub) => {
-  newPosts = r.getNew(sub);
+const fetch = async (sub) => {
+  newPosts = await r.getNew(sub);
   let words = [];
-  return newPosts.forEach(post => {
+  for (const post of newPosts) {
     words.push(post.title.split(" "));
    try {
      words.push(post.selftext.split(" "))
@@ -21,16 +25,18 @@ const fetch = (sub) => {
         console.log(error);
     }
     try {
-    post.comments.fetchAll().forEach(comment => {
+    const comments = await post.comments.fetchAll()
+      for(const comment of comments) {
         words.push(comment.body.split(" "))
-        //words.push(getReplies(comment))
-    });
+        console.log(comment.body.split(" "))
+        words.push(await getReplies(comment))
+        console.log(await getReplies(comment))
+    }
     } catch (error) {
         console.log(error);
     }
-  }).then(() => {
-      return words.flat();
-  })
+  }
+  return words.flat();
 }
 
 
@@ -46,8 +52,10 @@ const count = (list) => {
     return words
 }
 
-const search = (sub) => {
-    console.log(count(fetch(sub)))
+const search = async (sub) => {
+    let wordsArray = (await fetch(sub))
+    console.log(wordsArray)
+    console.log(count(wordsArray))
 }
 
 
@@ -56,3 +64,15 @@ document.querySelector("#searchButton").addEventListener("click", function() {
 });
 
 
+/*
+const getReplies = (comment) => {
+  let result = [];
+  return comment.replies.fetchAll().forEach(reply => {
+    result.push(reply.body.split(" "));
+    result.push(getReplies(reply));
+  }).then(() => {
+    return result.flat();
+  });
+}
+
+*/
