@@ -60,7 +60,7 @@ const search = async (sub) => {
     console.log("sorted_words: ", sorted_words)
 
     const chart = document.querySelector("#myBarChart")
-    createChart(chart, sorted_words,wordsArray.length)
+    createChart(chart, sorted_words,wordsArray.length,sub)
 }
 
 

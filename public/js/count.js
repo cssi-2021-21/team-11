@@ -28,14 +28,14 @@ const sortWordsByFrequency = (words) => {
 //     results.appendChild(node);
 // }
 
-const createChart = (canvas, sorted_words, wordsTotal) => {
+const createChart = (canvas, sorted_words, wordsTotal, sub) => {
     const ctx = canvas.getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: sorted_words.map(ar => ar[0]).slice(0,10),
             datasets: [{
-                label: '% frequency',
+                label: '% frequency of words in r/' + sub,
                 data: sorted_words.map(ar => 100*ar[1]/wordsTotal).slice(0,10),
                 borderWidth: 1
             }]
