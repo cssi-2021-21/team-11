@@ -68,5 +68,4 @@ document.querySelector("#searchButton").addEventListener("click", function() {
 
     const ar = search(document.querySelector("#subInput").value)
     
-    createChart(chart,ar,ar.length)
 });
