@@ -68,5 +68,5 @@ const createChart = (canvas, sorted_words, wordsTotal) => {
 }
 
 sorted_words = sortWordsByFrequency(count(testList))
-const chart = document.querySelector("#myChart2")
+const chart = document.querySelector("#myBarChart")
 createChart(chart,sorted_words,testList.length)
