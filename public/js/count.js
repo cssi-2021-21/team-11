@@ -2,6 +2,7 @@ testList = ["word1","word2","word3","word4","word1","word1","word4" ]
 
 // Takes dictionary of words where the values represent the number of words and outputs sorted 2d array
 const sortWordsByFrequency = (words) => {
+    console.log("sorting")
     // items is words in 2d array form
     let items = Object.keys(words).map(function(key) {
         return [key, words[key]];
@@ -13,19 +14,19 @@ const sortWordsByFrequency = (words) => {
     return items
 }
 
-const wordCounts = sortWordsByFrequency(count(testList))
+// const wordCounts = sortWordsByFrequency(count(testList))
 
-// Creates HTML list which is added to the results <ul> element
-results = document.querySelector("#results")
-for (let i in wordCounts) {
-    const word = wordCounts[i][0]
-    const count = wordCounts[i][1]
-    console.log(word,": ",count)
-    const node = document.createElement("LI");    
-    const textnode = document.createTextNode(`${word}: ${count} (${100*count/testList.length}%)`);         // Create a text node
-    node.appendChild(textnode);         
-    results.appendChild(node);
-}
+// // Creates HTML list which is added to the results <ul> element
+// results = document.querySelector("#results")
+// for (let i in wordCounts) {
+//     const word = wordCounts[i][0]
+//     const count = wordCounts[i][1]
+//     console.log(word,": ",count)
+//     const node = document.createElement("LI");    
+//     const textnode = document.createTextNode(`${word}: ${count} (${100*count/testList.length}%)`);         // Create a text node
+//     node.appendChild(textnode);         
+//     results.appendChild(node);
+// }
 
 const createChart = (canvas, sorted_words, wordsTotal) => {
     const ctx = canvas.getContext('2d');
@@ -55,21 +56,21 @@ const createChart = (canvas, sorted_words, wordsTotal) => {
     });
 }
 
-sorted_words = sortWordsByFrequency(count(testList))
-const chart = document.querySelector("#myBarChart")
-createChart(chart,sorted_words,testList.length)
+// sorted_words = sortWordsByFrequency(count(testList))
+// const chart = document.querySelector("#myBarChart")
+// createChart(chart,sorted_words,testList.length)
 
 
-list1 = [['canvas1', 90],['foo', 60], ['bar', 30]]
+list1 = [['canvas1', 9],['foo', 6], ['bar', 3]]
 list2 = [['canvas2',90],['foo', 30], ['bar', 60]]
 
 createWordCloud = (list, wordsTotal) => {
-    // console.log("Running create word cloud")
+    console.log("Running create word cloud")
     // console.log(list)
-    // percent_list = list.map(ar => [ar[0],ar[1]/wordsTotal])
+    percent_list = list.map(ar => [ar[0],ar[1]/wordsTotal])
     // console.log("percent list: ", percent_list)
-    // scaled_percent_list = percent_list.map(ar => [ar[0],Math.round(10*ar[1])])
+    scaled_percent_list = percent_list.map(ar => [ar[0],Math.round(10*ar[1])])
     // console.log("scaled percent list: ", scaled_percent_list)
     WordCloud(document.getElementById('myWordCloud'), { list: list} );
 }
-createWordCloud(sorted_words, testList.length)
+// createWordCloud(sorted_words, testList.length)

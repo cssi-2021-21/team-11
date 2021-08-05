@@ -48,11 +48,25 @@ const count = (list) => {
 }
 
 const search = async (sub) => {
-    let wordsArray = (await fetch(sub))
-    console.log(count(wordsArray))
+    all_words = (await fetch(sub))
+    console.log(all_words.length)
+    let wordsArray = all_words
+    console.log("words array: ", wordsArray)
+
+    const counted_words = count(wordsArray)
+    console.log("counted words: ", counted_words)
+
+    const sorted_words = sortWordsByFrequency(counted_words)
+    console.log("sorted_words: ", sorted_words)
+
+    const chart = document.querySelector("#myBarChart")
+    createChart(chart, sorted_words,wordsArray.length)
 }
 
 
 document.querySelector("#searchButton").addEventListener("click", function() {
-  search(document.querySelector("#subInput").value)
+
+    const ar = search(document.querySelector("#subInput").value)
+    
+    createChart(chart,ar,ar.length)
 });
