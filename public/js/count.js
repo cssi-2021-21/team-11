@@ -44,10 +44,10 @@ const createChart = (canvas, sorted_words, wordsTotal) => {
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: sorted_words.map(ar => ar[0]),
+            labels: sorted_words.map(ar => ar[0]).slice(0,10),
             datasets: [{
-                label: 'frequency',
-                data: sorted_words.map(ar => 100*ar[1]/wordsTotal),
+                label: '% frequency',
+                data: sorted_words.map(ar => 100*ar[1]/wordsTotal).slice(0,10),
                 borderWidth: 1
             }]
         },
@@ -70,3 +70,18 @@ const createChart = (canvas, sorted_words, wordsTotal) => {
 sorted_words = sortWordsByFrequency(count(testList))
 const chart = document.querySelector("#myBarChart")
 createChart(chart,sorted_words,testList.length)
+
+
+list1 = [['canvas1', 90],['foo', 60], ['bar', 30]]
+list2 = [['canvas2',90],['foo', 30], ['bar', 60]]
+
+createWordCloud = (list, wordsTotal) => {
+    // console.log("Running create word cloud")
+    // console.log(list)
+    // percent_list = list.map(ar => [ar[0],ar[1]/wordsTotal])
+    // console.log("percent list: ", percent_list)
+    // scaled_percent_list = percent_list.map(ar => [ar[0],Math.round(10*ar[1])])
+    // console.log("scaled percent list: ", scaled_percent_list)
+    WordCloud(document.getElementById('myWordCloud'), { list: list} );
+}
+createWordCloud(sorted_words, testList.length)
