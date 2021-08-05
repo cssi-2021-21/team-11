@@ -12,6 +12,7 @@ count = (list) => {
     return words
 }
 
+// Takes dictionary of words where the values represent the number of words and outputs sorted 2d array
 const sortWordsByFrequency = (words) => {
     // items is words in 2d array form
     let items = Object.keys(words).map(function(key) {
@@ -26,6 +27,7 @@ const sortWordsByFrequency = (words) => {
 
 const wordCounts = sortWordsByFrequency(count(testList))
 
+// Creates HTML list which is added to the results <ul> element
 results = document.querySelector("#results")
 for (let i in wordCounts) {
     const word = wordCounts[i][0]
@@ -36,4 +38,3 @@ for (let i in wordCounts) {
     node.appendChild(textnode);         
     results.appendChild(node);
 }
-
