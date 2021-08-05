@@ -62,17 +62,3 @@ const search = async (sub) => {
 document.querySelector("#searchButton").addEventListener("click", function() {
   search(document.querySelector("#subInput").value)
 });
-
-
-/*
-const getReplies = (comment) => {
-  let result = [];
-  return comment.replies.fetchAll().forEach(reply => {
-    result.push(reply.body.split(" "));
-    result.push(getReplies(reply));
-  }).then(() => {
-    return result.flat();
-  });
-}
-
-*/
