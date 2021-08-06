@@ -115,6 +115,18 @@ const search = async (sub) => {
     const sorted_words = sortWordsByFrequency(counted_words)
     console.log("sorted_words: ", sorted_words)
 
+    // Makes HTML list which is added to the results <ul> element
+    results = document.querySelector("#results")
+    for (let i in sorted_words) {
+        const word = sorted_words[i][0]
+        const count = sorted_words[i][1]
+        console.log(word,": ",count)
+        const node = document.createElement("LI");    
+        const textnode = document.createTextNode(`${word}: ${count} (${100*count/all_words.length}%)`);         // Create a text node
+        node.appendChild(textnode);         
+        results.appendChild(node);
+    }
+
     // Makes bar chart
     const chart = document.querySelector("#myBarChart")    
     createChart(chart, sorted_words,wordsArray.length,sub)
@@ -122,6 +134,8 @@ const search = async (sub) => {
     // Makes word cloud
     const test = sorted_words.map(ar => [ar[0],ar[1]+1]);
     createWordCloud(test,all_words.length )
+
+
     
 }
 
@@ -129,5 +143,7 @@ const search = async (sub) => {
 document.querySelector("#searchButton").addEventListener("click", function() {
 
     const ar = search(document.querySelector("#subInput").value)
+
+
     
 });
