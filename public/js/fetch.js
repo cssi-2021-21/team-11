@@ -38,7 +38,9 @@ const fetch = async (sub) => {
 const count = (list) => {
     words = {}
     list.forEach(word => {
-        if (word in words) {
+        if (word === "") {
+            //pass
+        } else if (word in words) {
             words[word] += 1
         }else {
             words[word] = 1
